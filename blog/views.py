@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
@@ -5,7 +6,9 @@ from django.views.generic.base import TemplateView, RedirectView
 from blog.forms import PostForm
 from blog.models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
+
 # Create your views here.
+
 #FUNCTION BASE VIEW
 # def indexView(request):
 #     """

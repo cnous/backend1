@@ -38,7 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'blog'
+    'blog',
+    'rest_framework',
+    'django_filters',
+    'drf_yasg',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'mail_templated',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend1.urls'
@@ -136,3 +143,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #user manager config by cnous
 AUTH_USER_MODEL = 'accounts.User'
+
+#rest framwork we added manually
+#REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#     ]
+# }
+
+REST_FRAMEWORK = {
+        'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.TokenAuthentication',
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+    ]
+}
+
+#email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp4dv'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 25

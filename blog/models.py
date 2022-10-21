@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from django.urls import reverse
 
 # Create your models here.
 class Post(models.Model):
@@ -18,6 +19,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    def get_snippet(self):
+        return self.content[0:5]
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
