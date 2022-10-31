@@ -13,3 +13,9 @@ drf-yasg
 
 #email third party modules
 django-mail-templated
+
+#refactoring and test
+black
+flake8
+pytest
+pytest-django

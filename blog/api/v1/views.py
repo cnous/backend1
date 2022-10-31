@@ -4,9 +4,17 @@ from .serializers import PostSerializer, CategorySerializer
 from ...models import Post, Category
 from rest_framework import status
 from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import (
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated,
+)
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView, ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    GenericAPIView,
+    ListAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 from rest_framework import mixins
 from rest_framework import viewsets
 from .permissions import IsOwnerOrReadOnly
@@ -30,11 +38,11 @@ from .pagination import DefaultPagination
 #         else:
 #             return Response(serializer.errors)
 
+
 class PostList(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-
 
 
 # class PostList(APIView):
@@ -51,7 +59,6 @@ class PostList(ListCreateAPIView):
 #         serializer.is_valid(raise_exception=True)
 #         serializer.save()
 #         return Response(serializer.data)
-
 
 
 # @api_view(['GET', 'PUT', 'DELETE'])
@@ -98,28 +105,28 @@ class PostList(ListCreateAPIView):
 #         post.delete()
 #         return Response({'detial': 'item removed successfully'}, status=status.HTTP_204_NO_CONTENT)
 
+
 class PostDetail(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    lookup_field = 'id'
-
-
+    lookup_field = "id"
 
     # def get(self, request, id):
     #     post = get_object_or_404(Post, pk=id, status=True)
     #     serializer = self.serializer_class(post)
     #     return Response(serializer.data)
 
+
 class PostModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    #chon az ModelViewset estefade kardim niazi be tarife dasti method nis
+    # chon az ModelViewset estefade kardim niazi be tarife dasti method nis
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['category',  'author']
-    search_fields = ['title', 'content']
-    ordering_fields = ['created_date']
+    filterset_fields = ["category", "author"]
+    search_fields = ["title", "content"]
+    ordering_fields = ["created_date"]
     pagination_class = DefaultPagination
 
 
